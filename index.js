@@ -1,28 +1,29 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const _ = require('lodash')
-const { json } = require('body-parser')
+const express = require("express");
+const bodyParser = require("body-parser");
+const _ = require("lodash");
+const { json } = require("body-parser");
 
-const app = express()
-app.use(bodyParser.json())
+const app = express();
+app.use(bodyParser.json());
 
-app.get('/api/hello', async (req, res) => {
+app.get("/api/hello", async (req, res) => {
+  const somekey = process.env.APPSETTING_somekey;
 
-    res.send('Hello')
-})
+  // const list = JSON.stringify(process.env)
 
-app.get('/api/merhaba', (req, res) => {
+  res.send("somekey: " + somekey);
+});
 
-    res.send('Merhaba')
-})
+app.get("/api/merhaba", (req, res) => {
+  res.send("Merhaba");
+});
 
-app.post('/api/name', (req, res) => {
-
-    const body = _.pick(req.body, ['firstName','lastName'])
-    console.log(body)
-    res.send('Hello '+body.firstName+' '+body.lastName)
-})
+app.post("/api/name", (req, res) => {
+  const body = _.pick(req.body, ["firstName", "lastName"]);
+  console.log(body);
+  res.send("Hello " + body.firstName + " " + body.lastName);
+});
 
 app.listen(8080, () => {
-    console.log('app server is running')
-})
+  console.log("app server is running");
+});
